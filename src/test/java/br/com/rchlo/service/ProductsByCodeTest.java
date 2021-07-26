@@ -27,7 +27,6 @@ class ProductsByCodeTest {
         List<Product> products = List.of(aTShirt(), aJacket());
 
         List<Product> filteredProducts = productsByCode.filter(14124998L, products);
-
         assertEquals(1, filteredProducts.size());
 
         Product product = filteredProducts.get(0);
