@@ -20,13 +20,7 @@ public class ProductsByEffectivePriceRangeMain {
         List<Product> filteredProducts = productsByEffectivePriceRangeFilter.m(minimumPrice, maximumPrice, allProducts);
 
         for (Product product : filteredProducts) {
-            boolean hasDiscount = product.getDiscount() != null;
-            BigDecimal effectivePrice;
-            if (hasDiscount) {
-                effectivePrice = product.getPrice().subtract(product.getDiscount());
-            } else {
-                effectivePrice = product.getPrice();
-            }
+            BigDecimal effectivePrice = product.discountCalculate();
             System.out.printf("%s - %s - R$ %.2f %n", product.getCode(), product.getName(), effectivePrice);
         }
 
