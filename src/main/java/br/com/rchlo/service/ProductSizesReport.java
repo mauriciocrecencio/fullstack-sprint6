@@ -1,12 +1,9 @@
 package br.com.rchlo.service;
 
-import br.com.rchlo.domain.Color;
 import br.com.rchlo.domain.Product;
 import br.com.rchlo.domain.Size;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.*;
 

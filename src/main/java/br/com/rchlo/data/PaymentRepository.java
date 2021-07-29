@@ -15,20 +15,14 @@ import java.util.List;
 
 public class PaymentRepository {
 
-    public List<Payment> all() {
-
-        List<Payment> allPayments = new ArrayList<>();
-
-        String query = "select id, amount, card_holder_name, card_number, card_expiration, card_verification_code, status" +
-                " from payment";
-
+    private List<Payment> getPayments(List<Payment> allPayments, String query) {
         ConnectionFactory.init();
         try (Connection connection = ConnectionFactory.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            while(resultSet.next()) {
+            while (resultSet.next()) {
 
                 long id = resultSet.getLong("id");
                 BigDecimal amount = resultSet.getBigDecimal("amount");
@@ -38,7 +32,8 @@ public class PaymentRepository {
                 YearMonth cardExpiration = YearMonth.parse(resultSet.getString("card_expiration"));
                 String cardVerificationCode = resultSet.getString("card_verification_code");
 
-                var card = new Card(cardHolderName, cardNumber, cardExpiration, cardVerificationCode);
+                var card = new Card(cardHolderName, cardNumber, cardExpiration,
+                    cardVerificationCode);
 
                 var status = PaymentStatus.valueOf(resultSet.getString("status"));
 
@@ -52,5 +47,25 @@ public class PaymentRepository {
         }
 
         return allPayments;
+    }
+
+    public List<Payment> listConfirmedPayments() {
+        List<Payment> allPayments = new ArrayList<>();
+
+        String query = "select * from payment where status = 'CONFIRMED';";
+        return getPayments(allPayments, query);
+
+    }
+
+    public List<Payment> all() {
+
+        List<Payment> allPayments = new ArrayList<>();
+
+        String query =
+            "select id, amount, card_holder_name, card_number, card_expiration, card_verification_code, status"
+                +
+                " from payment";
+
+        return getPayments(allPayments, query);
     }
 }

@@ -112,4 +112,14 @@ public class Product implements Comparable<Product>{
     public int compareTo(Product product) {
         return this.code.compareTo(product.getCode());
     }
+
+    public BigDecimal discountCalculate() {
+        boolean hasDiscount = getDiscount() != null;
+        BigDecimal effectivePrice;
+        if (hasDiscount) {
+            return effectivePrice = getPrice().subtract(getDiscount());
+        } else {
+            return effectivePrice = getPrice();
+        }
+    }
 }

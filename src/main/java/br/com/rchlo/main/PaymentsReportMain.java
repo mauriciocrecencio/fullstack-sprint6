@@ -12,7 +12,6 @@ public class PaymentsReportMain {
     public static void main(String[] args) {
         var paymentRepository = new PaymentRepository();
         var paymentStatisticsCalculator = new PaymentStatisticsCalculator(paymentRepository);
-
         PaymentStatistics paymentStatistics = paymentStatisticsCalculator.calculate();
 
         System.out.printf("%nMaior pagamento confirmado %.2f %n", paymentStatistics.getMaximumAmountOfConfirmedPayment());

@@ -5,7 +5,6 @@ import br.com.rchlo.domain.Payment;
 import br.com.rchlo.domain.PaymentStatus;
 import br.com.rchlo.dto.PaymentStatistics;
 import br.com.rchlo.util.GeneratePaymentsForTests;
-import java.util.Arrays;
 import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,7 +32,7 @@ class PaymentStatisticsCalculatorTest {
 
     @Test
     void shouldCalculateMaximumAmountOfConfirmedPayment() {
-        Mockito.when(paymentRepository.all()).thenReturn(GeneratePaymentsForTests.generate());
+        Mockito.when(paymentRepository.listConfirmedPayments()).thenReturn(GeneratePaymentsForTests.generate());
         PaymentStatistics paymentStatistics = paymentStatisticsCalculator.calculate();
         BigDecimal maximumAmountOfConfirmedPayment = paymentStatistics.getMaximumAmountOfConfirmedPayment();
         Assertions.assertThat(maximumAmountOfConfirmedPayment).isEqualTo(new BigDecimal("200.00"));
@@ -41,7 +40,7 @@ class PaymentStatisticsCalculatorTest {
 
     @Test
     void deveConsiderarQuantidadeDePagamentoPorStatus() {
-        Mockito.when(paymentRepository.all()).thenReturn(GeneratePaymentsForTests.generate());
+        Mockito.when(paymentRepository.listConfirmedPayments()).thenReturn(GeneratePaymentsForTests.generate());
 
         PaymentStatistics paymentStatistics = paymentStatisticsCalculator.calculate();
 

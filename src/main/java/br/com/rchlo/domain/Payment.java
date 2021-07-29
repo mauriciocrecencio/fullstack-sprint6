@@ -15,6 +15,16 @@ public class Payment {
         this.status = status;
     }
 
+    @Override
+    public String toString() {
+        return "Payment{" +
+            "id=" + id +
+            ", amount=" + amount +
+            ", card=" + card +
+            ", status=" + status +
+            '}';
+    }
+
     public Payment(Long id, BigDecimal amount, Card card, PaymentStatus status) {
        this(amount, card, status);
        this.id = id;
