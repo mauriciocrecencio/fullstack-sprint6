@@ -11,5 +11,6 @@ public class ProductColorsReportMain {
     public static void main(String[] args) {
         ProductColorsReport service = new ProductColorsReport();
         Map<Color, Long> report = service.report(ProductRepository.all());
+        System.out.println(report);
     }
 }
