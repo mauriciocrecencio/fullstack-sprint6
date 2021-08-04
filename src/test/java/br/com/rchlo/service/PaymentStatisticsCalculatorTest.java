@@ -23,6 +23,7 @@ class PaymentStatisticsCalculatorTest {
     @Mock
     private PaymentRepository paymentRepository;
 
+
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
@@ -32,23 +33,27 @@ class PaymentStatisticsCalculatorTest {
 
     @Test
     void shouldCalculateMaximumAmountOfConfirmedPayment() {
-        Mockito.when(paymentRepository.listConfirmedPayments()).thenReturn(GeneratePaymentsForTests.generate());
+        Mockito.when(paymentRepository.listConfirmedPayments())
+               .thenReturn(GeneratePaymentsForTests.generate());
         PaymentStatistics paymentStatistics = paymentStatisticsCalculator.calculate();
-        BigDecimal maximumAmountOfConfirmedPayment = paymentStatistics.getMaximumAmountOfConfirmedPayment();
+        BigDecimal maximumAmountOfConfirmedPayment = paymentStatistics
+            .getMaximumAmountOfConfirmedPayment();
         Assertions.assertThat(maximumAmountOfConfirmedPayment).isEqualTo(new BigDecimal("200.00"));
     }
 
     @Test
     void deveConsiderarQuantidadeDePagamentoPorStatus() {
-        Mockito.when(paymentRepository.listConfirmedPayments()).thenReturn(GeneratePaymentsForTests.generate());
+        Mockito.when(paymentRepository.listConfirmedPayments())
+               .thenReturn(GeneratePaymentsForTests.generate());
 
         PaymentStatistics paymentStatistics = paymentStatisticsCalculator.calculate();
 
-        Map<PaymentStatus, Long> quantityOfPaymentsByStatus = paymentStatistics.getQuantityOfPaymentsByStatus();
+        Map<PaymentStatus, Long> quantityOfPaymentsByStatus = paymentStatistics
+            .getQuantityOfPaymentsByStatus();
         Assertions.assertThat(quantityOfPaymentsByStatus)
-                .containsEntry(PaymentStatus.CREATED, 2L)
-                .containsEntry(PaymentStatus.CONFIRMED, 1L)
-                .containsEntry(PaymentStatus.CANCELED, 1L);
+                  .containsEntry(PaymentStatus.CREATED, 2L)
+                  .containsEntry(PaymentStatus.CONFIRMED, 1L)
+                  .containsEntry(PaymentStatus.CANCELED, 1L);
     }
 
 }
