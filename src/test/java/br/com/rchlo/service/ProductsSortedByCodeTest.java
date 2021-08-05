@@ -3,15 +3,16 @@ package br.com.rchlo.service;
 import static org.junit.jupiter.api.Assertions.*;
 
 import br.com.rchlo.domain.Product;
-import br.com.rchlo.util.GenerateProductsForTests;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import mother.ProductMother;
 import org.junit.jupiter.api.Test;
 
 class ProductsSortedByCodeTest {
 
-    List<Product> products = GenerateProductsForTests.generate();
+    private final List<Product> productsList = List
+        .of(ProductMother.aBlueJacket(), ProductMother.aCheapTankTop(), ProductMother.aWhiteTShirt());
     ProductsSortedByCode service = new ProductsSortedByCode();
 
     //    Da pra deixar o código em UMA LINHA SÓ =O
@@ -24,9 +25,9 @@ class ProductsSortedByCodeTest {
 
     @Test
     void shouldReturnProductsOrderedByCode() {
-        List<Product> expected = new ArrayList<>(products);
+        List<Product> expected = new ArrayList<>(productsList);
         expected.sort(comparator);
-        List<Product> actual = service.sortByCode(this.products);
+        List<Product> actual = service.sortByCode(productsList);
         assertEquals(expected, actual);
     }
 

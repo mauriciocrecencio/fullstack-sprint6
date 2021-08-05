@@ -2,7 +2,7 @@ package br.com.rchlo.service;
 
 import br.com.rchlo.domain.Color;
 import br.com.rchlo.domain.Product;
-import br.com.rchlo.util.GenerateProductsForTests;
+import mother.ProductMother;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -13,15 +13,15 @@ import static org.junit.jupiter.api.Assertions.*;
 class ProductsByColorTest {
 
   private final ProductsByColor service = new ProductsByColor();
-  public List<Product> products = GenerateProductsForTests.generate();
+  private final List<Product> productsList = List
+      .of(ProductMother.aBlueJacket(), ProductMother.aCheapTankTop(), ProductMother.aWhiteTShirt());
 
-  // Nenhuma lógica dentro do teste
-  // Poderia trocar por somente 1 produto
+
   @Test
   public void shouldFilterProductsByColor() {
-    List<Product> whiteProducts = service.filter(Color.WHITE, products);
-    List<Product> blueProducts = service.filter(Color.BLUE, products);
-    List<Product> otherColorProducts = service.filter(Color.RED, products);
+    List<Product> whiteProducts = service.filter(Color.WHITE, productsList);
+    List<Product> blueProducts = service.filter(Color.BLUE, productsList);
+    List<Product> otherColorProducts = service.filter(Color.RED, productsList);
    assertEquals(1, whiteProducts.size());
    assertEquals("Camiseta Branca", whiteProducts.get(0).getName());
 
@@ -41,7 +41,7 @@ class ProductsByColorTest {
 
   @Test
   public void shouldThrowANullPointerExceptionIfColorIsNull() {
-    assertThrows(NullPointerException.class, () -> service.filter(null, this.products));
+    assertThrows(NullPointerException.class, () -> service.filter(null, productsList));
   }
 
   @Test

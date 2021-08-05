@@ -3,7 +3,6 @@ package br.com.rchlo.main;
 import br.com.rchlo.data.ProductRepository;
 import br.com.rchlo.domain.Product;
 import br.com.rchlo.domain.Size;
-import br.com.rchlo.service.ProductColorsReport;
 import br.com.rchlo.service.ProductSizesReport;
 
 import java.util.List;

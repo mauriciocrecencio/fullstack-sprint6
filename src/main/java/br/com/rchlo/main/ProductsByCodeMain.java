@@ -8,17 +8,17 @@ import java.util.List;
 
 public class ProductsByCodeMain {
 
-    public static void main(String[] args) {
+  public static void main(String[] args) {
 
-        var productsByCodeFilter = new ProductsByCode();
-        List<Product> allProducts = ProductRepository.all();
+    var productsByCodeFilter = new ProductsByCode();
+    List<Product> allProducts = ProductRepository.all();
 
-        List<Product> filteredProducts = productsByCodeFilter.filter(14040174L, allProducts);
+    List<Product> filteredProducts = productsByCodeFilter.filter(14040174L, allProducts);
 
-        for (Product product : filteredProducts) {
-            System.out.printf("%s - %s %n", product.getCode(), product.getName());
-        }
-
+    for (Product product : filteredProducts) {
+      System.out.printf("%s - %s %n", product.getCode(), product.getName());
     }
+
+  }
 
 }

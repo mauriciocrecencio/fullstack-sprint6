@@ -6,17 +6,18 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import br.com.rchlo.domain.Color;
 import br.com.rchlo.domain.Product;
-import br.com.rchlo.util.GenerateProductsForTests;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import mother.ProductMother;
 import org.junit.jupiter.api.Test;
 
 class ProductColorsReportTest {
 
-  List<Product> productsList = GenerateProductsForTests.generate();
+  private final List<Product> productsList = List
+      .of(ProductMother.aBlueJacket(), ProductMother.aCheapTankTop(), ProductMother.aWhiteTShirt());
   ProductColorsReport service = new ProductColorsReport();
 
   @Test
@@ -42,7 +43,7 @@ class ProductColorsReportTest {
     assertThat(quantityPerColor)
         .contains(
             entry(Color.WHITE, 1L),
-            entry(Color.GRAY, 0L),
+            entry(Color.GRAY, 1L),
             entry(Color.PINK, 0L),
             entry(Color.BLUE, 1L));
   }

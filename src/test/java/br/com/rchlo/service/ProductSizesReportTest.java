@@ -2,18 +2,18 @@ package br.com.rchlo.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import br.com.rchlo.domain.Product;
 import br.com.rchlo.domain.Size;
 
 import java.util.*;
 
-import br.com.rchlo.util.GenerateProductsForTests;
+import mother.ProductMother;
 import org.junit.jupiter.api.Test;
 
 class ProductSizesReportTest {
 
-  private final List<Product> products = GenerateProductsForTests.generate();
+  private final List<Product> productsList = List
+      .of(ProductMother.aBlueJacket(), ProductMother.aCheapTankTop(), ProductMother.aWhiteTShirt());
   ProductSizesReport service = new ProductSizesReport();
 
   @Test
@@ -33,12 +33,12 @@ class ProductSizesReportTest {
 
   @Test
   void shouldReturnAMapProductsBySize() {
-    Map<Size, List<Product>> mapProductsBySize = service.report(products);
-    assertEquals(1, mapProductsBySize.get(Size.LARGE).size());
+    Map<Size, List<Product>> mapProductsBySize = service.report(productsList);
+    assertEquals(2, mapProductsBySize.get(Size.LARGE).size());
     assertEquals("Jaqueta de frio azul", mapProductsBySize.get(Size.LARGE).get(0).getName());
 
-    assertEquals(1, mapProductsBySize.get(Size.SMALL).size());
-    assertEquals("Camiseta Branca", mapProductsBySize.get(Size.SMALL).get(0).getName());
+    assertEquals(2, mapProductsBySize.get(Size.SMALL).size());
+    assertEquals("Regata Infantil Mario Bros", mapProductsBySize.get(Size.SMALL).get(0).getName());
 
   }
 }
