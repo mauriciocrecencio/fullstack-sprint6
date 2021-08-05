@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.Set;
 
-public class Product implements Comparable<Product> {
+public class Product  {
 
     private final Long code;
     private final String name;
@@ -114,17 +114,9 @@ public class Product implements Comparable<Product> {
             '}';
     }
 
-    @Override
-    public int compareTo(Product product) {
-        return this.code.compareTo(product.getCode());
-    }
 
     public BigDecimal discountCalculate() {
         boolean hasDiscount = getDiscount() != null;
-        if (hasDiscount) {
-            return getPrice().subtract(getDiscount());
-        }
-
-        return getPrice();
+        return hasDiscount ? getPrice().subtract(getDiscount()) : getPrice();
     }
 }
