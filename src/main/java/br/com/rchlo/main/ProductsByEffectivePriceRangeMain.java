@@ -18,7 +18,7 @@ public class ProductsByEffectivePriceRangeMain {
         BigDecimal maximumPrice = new BigDecimal("50.00");
 
         List<Product> filteredProducts = productsByEffectivePriceRangeFilter
-            .m(minimumPrice, maximumPrice, allProducts);
+            .main(minimumPrice, maximumPrice, allProducts);
 
         for (Product product : filteredProducts) {
             BigDecimal effectivePrice = product.discountCalculate();

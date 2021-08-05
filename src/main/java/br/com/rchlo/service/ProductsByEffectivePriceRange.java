@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ProductsByEffectivePriceRange {
 
-  public List<Product> m(BigDecimal minimumPrice, BigDecimal maximumPrice, List<Product> list) {
+  public List<Product> main(BigDecimal minimumPrice, BigDecimal maximumPrice, List<Product> list) {
     if (minimumPrice == null) {
       throw new IllegalArgumentException("minimum price should not be null");
     }
