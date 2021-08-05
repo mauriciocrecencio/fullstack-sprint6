@@ -27,9 +27,10 @@ public class ConnectionFactory {
 
     private static void runScript(String script) {
         try {
-            Path path = Paths.get(ConnectionFactory.class.getClassLoader().getResource(script).toURI());
+            Path path = Paths
+                .get(ConnectionFactory.class.getClassLoader().getResource(script).toURI());
             String schema = Files.readString(path);
-            try(Connection connection = getConnection();
+            try (Connection connection = getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(schema)) {
                 preparedStatement.execute();
                 System.out.println("Script ran successfully: " + script);

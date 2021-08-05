@@ -14,11 +14,14 @@ public class PaymentsReportMain {
         var paymentStatisticsCalculator = new PaymentStatisticsCalculator(paymentRepository);
         PaymentStatistics paymentStatistics = paymentStatisticsCalculator.calculate();
 
-        System.out.printf("%nMaior pagamento confirmado %.2f %n", paymentStatistics.getMaximumAmountOfConfirmedPayment());
+        System.out.printf("%nMaior pagamento confirmado %.2f %n",
+            paymentStatistics.getMaximumAmountOfConfirmedPayment());
 
-        Map<PaymentStatus, Long> quantidadeDePagamentoPorStatus = paymentStatistics.getQuantityOfPaymentsByStatus();
+        Map<PaymentStatus, Long> quantidadeDePagamentoPorStatus = paymentStatistics
+            .getQuantityOfPaymentsByStatus();
         for (PaymentStatus paymentStatus : quantidadeDePagamentoPorStatus.keySet()) {
-            System.out.printf("Quantidade de pagamentos com status '%s': %d %n", paymentStatus, quantidadeDePagamentoPorStatus.get(paymentStatus));
+            System.out.printf("Quantidade de pagamentos com status '%s': %d %n", paymentStatus,
+                quantidadeDePagamentoPorStatus.get(paymentStatus));
         }
     }
 

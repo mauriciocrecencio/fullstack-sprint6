@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.Set;
 
-public class Product implements Comparable<Product>{
+public class Product implements Comparable<Product> {
 
     private final Long code;
     private final String name;
@@ -18,7 +18,9 @@ public class Product implements Comparable<Product>{
     private final String image;
     private final Set<Size> availableSizes;
 
-    public Product(Long code, String name, String description, String slug, String brand, BigDecimal price, BigDecimal discount, Color color, Integer weightInGrams, String image, Set<Size> availableSizes) {
+    public Product(Long code, String name, String description, String slug, String brand,
+        BigDecimal price, BigDecimal discount, Color color, Integer weightInGrams, String image,
+        Set<Size> availableSizes) {
         this.code = code;
         this.name = name;
         this.description = description;
@@ -78,8 +80,12 @@ public class Product implements Comparable<Product>{
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Product product = (Product) o;
 
@@ -94,18 +100,18 @@ public class Product implements Comparable<Product>{
     @Override
     public String toString() {
         return "Product{" +
-                "code=" + code +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", slug='" + slug + '\'' +
-                ", brand='" + brand + '\'' +
-                ", price=" + price +
-                ", discount=" + discount +
-                ", color=" + color +
-                ", weightInGrams=" + weightInGrams +
-                ", image='" + image + '\'' +
-                ", availableSizes=" + availableSizes +
-                '}';
+            "code=" + code +
+            ", name='" + name + '\'' +
+            ", description='" + description + '\'' +
+            ", slug='" + slug + '\'' +
+            ", brand='" + brand + '\'' +
+            ", price=" + price +
+            ", discount=" + discount +
+            ", color=" + color +
+            ", weightInGrams=" + weightInGrams +
+            ", image='" + image + '\'' +
+            ", availableSizes=" + availableSizes +
+            '}';
     }
 
     @Override
@@ -115,11 +121,10 @@ public class Product implements Comparable<Product>{
 
     public BigDecimal discountCalculate() {
         boolean hasDiscount = getDiscount() != null;
-        BigDecimal effectivePrice;
         if (hasDiscount) {
-            return effectivePrice = getPrice().subtract(getDiscount());
-        } else {
-            return effectivePrice = getPrice();
+            return getPrice().subtract(getDiscount());
         }
+
+        return getPrice();
     }
 }

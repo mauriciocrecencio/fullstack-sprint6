@@ -21,7 +21,8 @@ class ProductColorsReportTest {
     @Test
     void DeveRetornarUmMapaVazioSeAListaDeProdutosPassadaForVazia() {
         Map<Color, Long> actual = service.report(new ArrayList<>());
-        assertEquals(Collections.emptyMap(), actual);
+        assertEquals(Collections.emptyMap(),
+            actual); // TODO: verificar se o actual é realmente isso
     }
 
     @Test

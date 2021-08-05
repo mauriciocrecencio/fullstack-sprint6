@@ -21,8 +21,12 @@ public class ProductsByCode {
     }
 
     private void validateParameters(Long code, List<Product> products) {
-        if (code == null) throw new IllegalArgumentException("code should not be null");
-        if (products == null) throw new IllegalArgumentException("product list should not be null");
+        if (code == null) {
+            throw new IllegalArgumentException("code should not be null");
+        }
+        if (products == null) {
+            throw new IllegalArgumentException("product list should not be null");
+        }
     }
 
 }

@@ -16,7 +16,8 @@ class ProductsByColorTest {
     public List<Product> products = GenerateProductsForTests.generate();
     public Map<Color, Product> colorToProduct = new HashMap<>();
 
-
+    // Nenhuma lógica dentro do teste
+// Poderia trocar por somente 1 produto
     @Test
     public void filtragemDeProdutosPelaCorDeveFuncionarComMaisDeUmProdutoDaMesmaCor() {
         ProductsByColor service = new ProductsByColor();

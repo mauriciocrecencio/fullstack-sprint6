@@ -14,7 +14,7 @@ class ProductsSortedByCodeTest {
     List<Product> products = GenerateProductsForTests.generate();
     ProductsSortedByCode service = new ProductsSortedByCode();
 
-//    Da pra deixar o código em UMA LINHA SÓ =O
+    //    Da pra deixar o código em UMA LINHA SÓ =O
     Comparator<Product> comparator = new Comparator<Product>() {
         @Override
         public int compare(Product o1, Product o2) {
@@ -23,21 +23,23 @@ class ProductsSortedByCodeTest {
     };
 
     @Test
-    void DeveRetornarOsProdutosOrdenadosPeloCode() {
+    void shouldReturnProductsOrderedByCode() {
         List<Product> expected = new ArrayList<>(products);
         expected.sort(comparator);
         List<Product> actual = service.sortByCode(this.products);
-        assertEquals(expected,  actual);
+        assertEquals(expected, actual);
     }
+
     @Test
-    void DeveRetornarUmaNullExceptionSePassarProdutosNull() {
+    void shouldReturnANullExceptionIfProductsNull() {
         assertThrows(NullPointerException.class, () -> service.sortByCode(null));
     }
+
     @Test
-    void DeveRetornarUmaListaVaziaSePassarProdutosVazio() {
+    void shouldReturnAnEmptyListIfProductsEmpty() {
         List<Product> expected = new ArrayList<>();
         List<Product> actual = service.sortByCode(new ArrayList<>());
-        assertEquals(expected,  actual);
+        assertEquals(expected, actual);
     }
 
 }

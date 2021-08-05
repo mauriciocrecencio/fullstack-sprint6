@@ -10,9 +10,10 @@ import java.util.List;
 import java.util.Map;
 
 public class ProductSizesReportMain {
-  public static void main(String[] args) {
-    ProductSizesReport service = new ProductSizesReport();
-    Map<Size, List<Product>> report = service.report(ProductRepository.all());
-    System.out.println(report);
-  }
+
+    public static void main(String[] args) {
+        ProductSizesReport service = new ProductSizesReport();
+        Map<Size, List<Product>> report = service.report(ProductRepository.all());
+        System.out.println(report);
+    }
 }

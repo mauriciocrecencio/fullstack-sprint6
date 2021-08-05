@@ -17,7 +17,8 @@ public class PaymentStatisticsCalculator {
     }
 
     public PaymentStatistics calculate() {
-        List<Payment> allPayments = paymentRepository.listConfirmedPayments(); // será que essa é a melhor maneira de fazer isso?
+        List<Payment> allPayments = paymentRepository
+            .listConfirmedPayments(); // será que essa é a melhor maneira de fazer isso?
 
         BigDecimal maximumConfirmedPayment = BigDecimal.ZERO;
         for (Payment payment : allPayments) {

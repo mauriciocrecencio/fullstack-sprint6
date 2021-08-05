@@ -7,9 +7,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiFunction;
 
-public class PaymentStatistics  {
+public class PaymentStatistics {
 
-    private BigDecimal maximumAmountOfConfirmedPayment;
+    private final BigDecimal maximumAmountOfConfirmedPayment;
     HashMap<PaymentStatus, Long> mapPaymentStatistics = new HashMap<>();
 
     public PaymentStatistics(BigDecimal maximumAmountOfConfirmedPayment) {
@@ -33,7 +33,6 @@ public class PaymentStatistics  {
         }
         mapPaymentStatistics.put(status, quantity);
     }
-
 
 
 }

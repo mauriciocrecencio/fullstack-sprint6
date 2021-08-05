@@ -10,14 +10,15 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ProductsByColorMain {
-  public static void main(String[] args) {
-    //        Imprimir todas as camisetas brancas
-    ArrayList<Product> items = new ArrayList<>(GenerateProductsForTests.generate());
-    ProductsByColor service = new ProductsByColor();
-    List<Product> filter = service.filter(Color.BLUE, items);
-    for (Product product : filter) {
-      System.out.println(product);
-    }
 
-  }
+    public static void main(String[] args) {
+        //        Imprimir todas as camisetas brancas
+        ArrayList<Product> items = new ArrayList<>(GenerateProductsForTests.generate());
+        ProductsByColor service = new ProductsByColor();
+        List<Product> filter = service.filter(Color.BLUE, items);
+        for (Product product : filter) {
+            System.out.println(product);
+        }
+
+    }
 }

@@ -24,6 +24,7 @@ public class ProductColorsReport {
         if (products.size() == 0) {
             return Collections.emptyMap();
         }
+
         Map<Color, Long> map = products.stream().collect(groupingBy(Product::getColor, counting()));
 
         for (Color color : Color.values()) {

@@ -17,16 +17,17 @@ class ProductSizesReportTest {
     ProductSizesReport service = new ProductSizesReport();
 
     @Test
-    void DeveRetornarUmMapaVazioSeAListaDeProdutosForVazia() {
+    void ShouldReturnAnEmptyProductsMapIfProductsListIsEmpty() {
         Map<Object, Object> expected = Collections.emptyMap();
         Map<Size, List<Product>> actual = service.report(new ArrayList<>());
         assertEquals(expected, actual);
     }
 
     @Test
-    void DeveRetornarUmaExceptionSeAListaDeProdutosForNull() {
+    void ShouldReturnAnExceptionIfProductsListIsNull() {
         assertThrows(NullPointerException.class, () -> service.report(null));
     }
+
     @Test
     void DeveRetornarUmMapaComTodosOsTamanhos() {
 
