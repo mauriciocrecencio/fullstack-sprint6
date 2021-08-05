@@ -2,36 +2,43 @@ package br.com.rchlo.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import br.com.rchlo.data.ProductRepository;
+import static org.assertj.core.api.Assertions.assertThat;
 import br.com.rchlo.domain.Product;
 import br.com.rchlo.domain.Size;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+
+import java.util.*;
+
+import br.com.rchlo.util.GenerateProductsForTests;
 import org.junit.jupiter.api.Test;
 
 class ProductSizesReportTest {
 
-    List<Product> products = ProductRepository.all();
-    ProductSizesReport service = new ProductSizesReport();
+  private final List<Product> products = GenerateProductsForTests.generate();
+  ProductSizesReport service = new ProductSizesReport();
 
-    @Test
-    void ShouldReturnAnEmptyProductsMapIfProductsListIsEmpty() {
-        Map<Object, Object> expected = Collections.emptyMap();
-        Map<Size, List<Product>> actual = service.report(new ArrayList<>());
-        assertEquals(expected, actual);
+  @Test
+  void shouldReturnAnEmptyProductsMapIfProductsListIsEmpty() {
+    Map<Object, Object> expected = new HashMap<>();
+    for (Size size : Size.values()) {
+      expected.put(size, new ArrayList<>());
     }
+    Map<Size, List<Product>> actual = service.report(new ArrayList<>());
+    assertEquals(expected, actual);
+  }
 
-    @Test
-    void ShouldReturnAnExceptionIfProductsListIsNull() {
-        assertThrows(NullPointerException.class, () -> service.report(null));
-    }
+  @Test
+  void shouldReturnAnExceptionIfProductsListIsNull() {
+    assertThrows(NullPointerException.class, () -> service.report(null));
+  }
 
-    @Test
-    void DeveRetornarUmMapaComTodosOsTamanhos() {
+  @Test
+  void shouldReturnAMapProductsBySize() {
+    Map<Size, List<Product>> mapProductsBySize = service.report(products);
+    assertEquals(1, mapProductsBySize.get(Size.LARGE).size());
+    assertEquals("Jaqueta de frio azul", mapProductsBySize.get(Size.LARGE).get(0).getName());
 
-    }
+    assertEquals(1, mapProductsBySize.get(Size.SMALL).size());
+    assertEquals("Camiseta Branca", mapProductsBySize.get(Size.SMALL).get(0).getName());
 
-
+  }
 }

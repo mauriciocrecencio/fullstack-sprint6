@@ -21,9 +21,6 @@ public class ProductColorsReport {
         if (products == null) {
             throw new NullPointerException("Parâmetro 'products' é nulo.");
         }
-        if (products.size() == 0) {
-            return Collections.emptyMap();
-        }
 
         Map<Color, Long> map = products.stream().collect(groupingBy(Product::getColor, counting()));
 

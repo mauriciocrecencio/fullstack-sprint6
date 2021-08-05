@@ -1,51 +1,49 @@
 package br.com.rchlo.service;
 
+import static java.util.Map.entry;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 import br.com.rchlo.domain.Color;
 import br.com.rchlo.domain.Product;
 import br.com.rchlo.util.GenerateProductsForTests;
-import java.util.ArrayList;
-import java.util.Collections;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.jupiter.api.Test;
 
+import org.junit.jupiter.api.Test;
 
 class ProductColorsReportTest {
 
-    ProductColorsReport service = new ProductColorsReport();
-    List<Product> products = GenerateProductsForTests.generate();
+  List<Product> productsList = GenerateProductsForTests.generate();
+  ProductColorsReport service = new ProductColorsReport();
 
-    @Test
-    void DeveRetornarUmMapaVazioSeAListaDeProdutosPassadaForVazia() {
-        Map<Color, Long> actual = service.report(new ArrayList<>());
-        assertEquals(Collections.emptyMap(),
-            actual); // TODO: verificar se o actual é realmente isso
+  @Test
+  void shouldReturnAnMapWithAllKeysBeingZero() {
+    Map<Color, Long> expected = new HashMap<>();
+    Color[] colors = Color.values();
+    for (Color color : colors) {
+      expected.put(color, 0L);
     }
+    assertEquals(expected, service.report(List.of()));
+  }
 
-    @Test
-    void DeveRetornarUmaExceptionSePassarListaDeProductsNull() {
-        assertThrows(NullPointerException.class, () -> service.report(null));
-    }
+  @Test
+  void shouldReturnAnNullPointerExceptionIfProductsIsNull() {
+    assertThrows(NullPointerException.class, () -> service.report(null));
+  }
 
-    @Test
-    void DeveRetornarMapaComCor_WHITE_e_BLUE_valendo5() {
+  @Test
+  void shouldReturnTheQuantityPerColor() {
 
-        Map<Color, Long> excpected = new HashMap<>();
+    Map<Color, Long> quantityPerColor = this.service.report(productsList);
 
-        Map<Color, Long> actual = service.report(products);
-
-        for (Color color : Color.values()) {
-            if (color.equals(Color.WHITE)) {
-                excpected.put(Color.WHITE, 5L);
-            }
-            if (color.equals(Color.BLUE)) {
-                excpected.put(Color.BLUE, 5L);
-            }
-            excpected.putIfAbsent(color, 0L);
-        }
-        assertEquals(excpected, actual);
-    }
+    assertThat(quantityPerColor)
+        .contains(
+            entry(Color.WHITE, 1L),
+            entry(Color.GRAY, 0L),
+            entry(Color.PINK, 0L),
+            entry(Color.BLUE, 1L));
+  }
 }
